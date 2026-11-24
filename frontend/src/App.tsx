@@ -4,6 +4,7 @@ import { Plantilla } from './components/Plantilla';
 import { Ui01Preview } from './dev/Ui01Preview';
 import { Ui04Preview } from './dev/Ui04Preview';
 import { Ui05Preview } from './dev/Ui05Preview';
+import { SesionProveedor } from './features/acceso/SesionProveedor';
 import { rutasAcceso } from './features/acceso/rutas';
 import { rutasBfa } from './features/bfa/rutas';
 import { rutasCatalogo } from './features/catalog/rutas';
@@ -31,5 +32,10 @@ const router = createBrowserRouter([
 ]);
 
 export function App() {
-  return <RouterProvider router={router} />;
+  return (
+    // Un 401 con sesión abierta (token vencido o revocado) devuelve a la pantalla de acceso.
+    <SesionProveedor alExpirar={() => void router.navigate('/acceso', { replace: true })}>
+      <RouterProvider router={router} />
+    </SesionProveedor>
+  );
 }

@@ -4,6 +4,8 @@ WORKDIR /src
 COPY frontend/package.json frontend/package-lock.json ./
 RUN npm ci
 COPY frontend ./
+# Lo publicado usa la API real, no los datos simulados.
+ENV VITE_USAR_MOCKS=false
 RUN npm run build
 
 FROM nginx:1.27-alpine

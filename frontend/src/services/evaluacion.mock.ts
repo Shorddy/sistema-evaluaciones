@@ -154,7 +154,7 @@ const evaluacionesIniciales = (): EvaluacionResponse[] => [
 
 // ---------- Ayudas ----------
 
-function fallar(
+export function fallar(
   status: number,
   codigo: string,
   mensaje: string,
